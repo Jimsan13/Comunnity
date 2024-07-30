@@ -1,16 +1,17 @@
 import React from 'react';
-import { Appbar, Menu, Switch, List } from 'react-native-paper';
+import { Appbar, Menu, Switch } from 'react-native-paper';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Notifications from './Notifications';
+import SearchBar from '../components/SearchBar';
 
-const MenuComponent = () => {
+
+
+const MenuComponent = ({ toggleDarkMode, isDarkMode }) => {
   const [visible, setVisible] = React.useState(false);
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
-
-  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   return (
     <View>
@@ -18,7 +19,7 @@ const MenuComponent = () => {
         <Menu
           visible={visible}
           onDismiss={closeMenu}
-          anchor={<Appbar.Action icon="menu" color="black" onPress={openMenu} />}
+          anchor={<Appbar.Action icon="menu" onPress={openMenu} />}
         >
           <Menu.Item
             onPress={() => {}}
@@ -47,21 +48,20 @@ const MenuComponent = () => {
           />
           <Menu.Item
             onPress={toggleDarkMode}
-            title="Dark mode"
+            title="Modo Oscuro"
             icon={() => <Icon name="theme-light-dark" size={20} />}
             right={() => <Switch value={isDarkMode} onValueChange={toggleDarkMode} />}
           />
           <Menu.Item
             onPress={() => {}}
             title="Mi perfil"
-            icon={() => <Icon name="account-circle-outline" size={20} />}
-          />
+            icon={() => <Icon name="account-circle-outline" size={20} />}/>
         </Menu>
-        <Appbar.Content title="Community" />
+        <SearchBar />
+        <Notifications/>
       </Appbar.Header>
     </View>
   );
 };
 
 export default MenuComponent;
-

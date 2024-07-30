@@ -1,39 +1,51 @@
 import React from 'react';
-import { FlatList, View, Text, Image } from 'react-native';
+import { FlatList, View, Text, TouchableOpacity, Image } from 'react-native';
 import { Card } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
   {
     id: '1',
-    title: 'Servicio de Internet',
-    description: 'Ofrecemos planes de Internet de banda ancha que se adaptan a tus necesidades...',
-
+    name: 'Servicio de internet',
+    rating: '2.9',
+    description: 'Ofrecemos planes de Internet de banda ancha que se adaptan a tus necesidades, con velocidades que van desde los 50 MBps hasta 1 Gbps, asegurando que siempre estés conectado sin interrupciones.',
+    image: 'https://via.placeholder.com/100', // imagen
   },
-  // Repite este objeto para más elementos
+  {
+    id: '2',
+    name: 'Servicio de internet',
+    rating: '2.9',
+    description: 'Ofrecemos planes de Internet de banda ancha que se adaptan a tus necesidades, con velocidades que van desde los 50 MBps hasta 1 Gbps, asegurando que siempre estés conectado sin interrupciones.',
+    image: 'https://via.placeholder.com/100', //imagen
+  },
 ];
 
 const ItemList = () => {
+  const navigation = useNavigation();
+
   const renderItem = ({ item }) => (
-    <Card style={{ marginBottom: 10 }}>
-      <Card.Content>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Image source={item.image} style={{ width: 50, height: 50, marginRight: 10 }} />
-          <View style={{ flex: 1 }}>
-            <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
-            <Text>{item.description}</Text>
-          </View>
+    <TouchableOpacity onPress={() => navigation.navigate('BusinessDetails', { business: item })}>
+      <View style={{ flexDirection: 'row', marginBottom: 10, alignItems: 'center' }}>
+        <Image source={{ uri: item.image }} style={{ width: 100, height: 100, borderRadius: 10, marginRight: 10 }} />
+        <View style={{ flex: 1 }}>
+          <Text style={{ fontWeight: 'bold', marginBottom: 5 }}>{item.name}</Text>
+          <Text>{item.description}</Text>
         </View>
-      </Card.Content>
-    </Card>
+      </View>
+    </TouchableOpacity>
   );
 
   return (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-      contentContainerStyle={{ padding: 10 }}
-    />
+    <Card style={{ margin: 10, backgroundColor: 'white', borderRadius: 10 }}>
+      <Card.Content>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          contentContainerStyle={{ padding: 10 }}
+        />
+      </Card.Content>
+    </Card>
   );
 };
 
