@@ -18,14 +18,16 @@ const Footer = () => {
         <FontAwesome5 name="user-check" size={24} color="black" />
         <Text style={styles.label}>Seguidos</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.iconContainer}
        onPress={() => navigation.navigate('Recompensa')}>
         <FontAwesome5 name="trophy" size={24} color="black" />
         <Text style={styles.label}>Recompensas</Text>
       </TouchableOpacity>
+
       <TouchableOpacity 
         style={styles.iconContainer}
-        onPress={() => navigation.navigate('Menu')}
+        onPress={() => navigation.navigate('MenuDueño')}
       >
         <MaterialIcons name="more-horiz" size={24} color="black" />
         <Text style={styles.label}>Más</Text>

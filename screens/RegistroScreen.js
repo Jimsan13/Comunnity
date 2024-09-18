@@ -4,9 +4,22 @@ import { Button, TextInput, RadioButton, useTheme, Card } from 'react-native-pap
 
 import logo from '../assets/images/logo.png';
 
-const RegistroScreen = ({ navigation }) => {
+/* const RegistroScreen = ({ navigation }) => {
   const [checked, setChecked] = useState('dueño'); 
-  const theme = useTheme();
+  const theme = useTheme(); */
+
+  const HomeScreen = ({ navigation }) => {
+    const [checked, setChecked] = useState('');
+  
+    const handlePress = () => {
+      if (checked === 'dueño') {
+        navigation.navigate('Owner');
+      } else if (checked === 'comprador') {
+        navigation.navigate('Buyer');
+      } else {
+        alert('Por favor selecciona una opción.');
+      }
+    };
 
   return (
     <View style={styles.container}>
@@ -38,27 +51,27 @@ const RegistroScreen = ({ navigation }) => {
             theme={{ colors: { background: '#EBEBEB', primary: '#309EED', text: '#000000' } }}
           />
           
-          <Text style={styles.text}>Soy:</Text>
-          <View style={styles.radioContainer}>
-            <RadioButton
-              value="dueño"
-              status={checked === 'dueño' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('dueño')}
-              color="#309EED"
-            />
-            <Text style={styles.radioText}>Dueño</Text>
-            <RadioButton
-              value="comprador"
-              status={checked === 'comprador' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('comprador')}
-              color="#309EED"
-            />
-            <Text style={styles.radioText}>Comprador</Text>
-          </View>
-
+      <Text style={styles.text}>Soy:</Text>
+      <View style={styles.radioContainer}>
+        <RadioButton
+          value="dueño"
+          status={checked === 'dueño' ? 'checked' : 'unchecked'}
+          onPress={() => setChecked('dueño')}
+          color="#309EED"
+        />
+        <Text style={styles.radioText}>Dueño</Text>
+        <RadioButton
+          value="comprador"
+          status={checked === 'comprador' ? 'checked' : 'unchecked'}
+          onPress={() => setChecked('comprador')}
+          color="#309EED"
+        />
+        <Text style={styles.radioText}>Comprador</Text>
+      </View>
           <Button 
+            title=""
             mode="contained" 
-            onPress={() => navigation.navigate('Login')} 
+            onPress={handlePress} 
             style={styles.button}
             labelStyle={{ color: '#FFFFFF' }}
             contentStyle={{ backgroundColor: '#309EED' }}
@@ -149,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegistroScreen;
+export default HomeScreen;
